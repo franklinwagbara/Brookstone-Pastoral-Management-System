@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+    {% load static %}
+{% load bootstrap4 %}
+{% block head %}
+    <title>BrookStone</title>
+{% endblock %}
+{% block content %}
+    <div class="p-3 w-50">
+        <div class="form" >
+            <form method="POST" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form layout="inline" %}
+                {% buttons %}
+                    <button class="btn btn-primary" type="submit" value="save">Save</button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+    // When the user clicks on div, open the popup
+    function myFunction(elementId) {
+        var popup = document.getElementById(elementId);
+        popup.classList.toggle("show");
+    }
+    </script>
+
+    {% load staticfiles %}
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+{% endblock %}

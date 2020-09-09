@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/login.css' %}" />
+    <title>BrookStone</title>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <h2>BROOKSTONE <span><i>CHECK-IN</i></span></h2>
+        </ul>
+    </div>
+    <div class="messagebox">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="login">
+        <form method="POST">
+            <fieldset class="login-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="submit-button" type="submit">Login</button>
+            </fieldset>
+        </form>
+        <div class="signup-link">
+            <small class="text-muted">
+                Need An Account? <a href="{% url 'users-register' %}">Sign Up</a>
+            </small>
+        </div>
+    </div>
+</body>
+</html>

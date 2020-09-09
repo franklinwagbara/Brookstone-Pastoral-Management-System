@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+    {% load static %}
+{% block head %}
+    <title>BrookStone</title>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-4 p-4 pl-5">
+        <div  style="border-bottom-style: solid; border-bottom-color: grey;"><h5 class="border-1 d-inline-block pr-3">Check-In Season: </h5><span style="font-size: 18px;">{{ season.SeasonName }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: grey;"><h5 class="border-1 d-inline-block pr-3">Date: </h5><span style="font-size: 18px;">{{ season.Date }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: grey;"><h5 class="border-1 d-inline-block pr-3">Student Population: </h5><span style="font-size: 18px;">{{ season.TotalStudents }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: grey;"><h5 class="border-1 d-inline-block pr-3">Total Check-In: </h5><span style="font-size: 18px;">{{ season.TotalCheckIn }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: grey;"><h5 class="border-1 d-inline-block pr-3">Yet to Check-In: </h5><span style="font-size: 18px;">{{ season.TotalNotCheckIn }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: grey;"><h5 class="border-1 d-inline-block pr-3">Total Check-Out: </h5><span style="font-size: 18px;">{{ season.TotalCheckOut }}</span></div>
+    </div>
+    <div class="col-5 p-4">
+    </div>
+</div>
+{% endblock %}

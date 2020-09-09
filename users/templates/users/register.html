@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/register.css' %}" />
+    <title>BrookStone Portal</title>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <h2>BROOKSTONE <span><i>CHECK-IN</i></span></h2>
+        </ul>
+    </div>
+    <div class = "register">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="submit-button" type="submit">Sign Up</button>
+        </form>
+        <div class="register-login">
+            <small>
+                Already Have An Account? <a href="{% url 'login' %}">Login</a>
+            </small>
+        </div>
+    </div>
+
+</body>
+</html>

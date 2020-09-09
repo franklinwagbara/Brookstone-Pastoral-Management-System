@@ -1,0 +1,112 @@
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+
+    {% block head %}
+    {% endblock %}
+</head>
+{% block style %}
+{% endblock %}
+<body>
+    <div class="container-fluid" style="background-color: #6639ad; border-bottom-style: solid; border-bottom-color: #dd05e0;">
+        <div class="row" style="max-height: 50px;">
+            <div class="col-md-3 col-lg-3">
+
+            </div>
+            <div class="col-8 p-3 mx-auto">
+                <div class="d-none d-md-inline-block d-lg-inline-block mr-5" >
+                    <img class="mb-2" src="/media/logo.jpg" alt="Joh" style="width: 40px; height: 40px;"/>
+                </div>
+                <div class="d-inline-block">
+                  <h2 style="color: white; display: inline-block;">BROOKSTONE</h2><small class="d-none d-md-inline-block d-lg-inline-block alert-primary p-1"><i>CHECK-IN</i></small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mr-auto">
+                <a class="btn btn-primary d-none d-md-inline-block" href="/ ">Home</a>
+                <a class="btn btn-outline-primary float-right d-none d-md-inline-block" href="{% url 'logout' %}">({{user}})Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid row">
+        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 bg-light border-right border-primary p-2" style="background-color: #dcf9f9;">
+                <nav class="navbar navbar-expand-sm bg-primary navbar-dark d-md-none d-lg-none d-xl-none">
+                    <div class="container">
+                        <button class="navbar-toggler" data-toggle="collapse" data-target="#main">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                </nav>
+            <div class="btn-group-vertical btn-block navbar-collapse" id="main">
+              <button type="button" class="btn btn-primary  active dropdown-toggle m-1 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;" data-toggle="collapse" data-target="#mainNav">
+                  Students
+              </button>
+                <div class="collapse navbar-collapse text-truncate" id="mainNav">
+                    <div class="navbar-nav text-center">
+                        <a class="nav-item nav-link active" href="/StudentManager"><span class="text-wrap">Manage Records</span></a>
+                        <a class="nav-item nav-link" href="/importStudentLists/importTemplate"><span class="text-wrap">Upload Excel File</span></a>
+                        <a class="nav-item nav-link" href="/StudentManager/viewAddStudent"><span class="text-wrap">Add new Student</span></a>
+                        <a class="nav-item nav-link" href="#"><span class="text-wrap">Aboufsfsfsfsfsf sfsfsfsfsffsft</span></a>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary dropdown-toggle m-1 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;" data-toggle="collapse" data-target="#mainNav2">
+                   Manager
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav2">
+                    <div class="navbar-nav text-center">
+                        <a class="nav-item nav-link active" href="/Manager/viewSettings"><span class="text-wrap">View Settings</span></a>
+                        <a class="nav-item nav-link" href="/Manager/"><span class="text-wrap">Create CheckIn/Out Season</span></a>
+                        <a class="nav-item nav-link" href="/Manager/changeCurrentSeason"><span class="text-wrap">Change Season</span></a>
+                        <a class="nav-item nav-link" href="#"><span class="text-wrap">Aboufsfsfsfsfsf sfsfsfsfsffsft</span></a>
+                    </div>
+                </div>
+                <a type="button" href="/viewCheckIn_Admin" class="btn btn-primary  m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                    Gate Pass(Admin)
+                </a>
+                <a type="button" href="/Pass" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                    Gate Pass
+                </a>
+                <a type="button" href="/CheckIn" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                    Check-In(PC)
+                </a>
+                <a type="button" href="/principal_inbox/" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                    Inbox
+                </a>
+                <a type="button" href="/CreateParentForm" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                    Parent Form
+                </a>
+                <a type="button" href="/RegisterStaff" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                    Staff Registration
+                </a>
+                <a type="button" href="/checkout" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                    Check-Out
+                </a>
+            </div>
+        </div>
+      <div class="col-10">
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+
+</body>
+</html>

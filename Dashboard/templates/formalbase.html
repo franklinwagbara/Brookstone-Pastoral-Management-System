@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/dashboard.css' %}"/>
+    {% block head %}
+    {% endblock %}
+</head>
+{% block style %}
+{% endblock %}
+<body>
+<div class="nav">
+    <div class="logo"><img src="/media/logo.jpg" alt="Joh" style="width:100%; height: 100%"></div>
+    <ul><h2>BROOKSTONE <span><i>CHECK-IN</i></span></h2>
+        <li><a class="active" href="/ ">Home</a></li>
+        <li style="float:right"><a href="{% url 'logout' %}">({{user}})Logout</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="side-nav">
+        <ul class="side-nav-ul">
+            {% if perms.dashboard.view_principalinbox or perms.dashboard.view_staffs or perms.admin.view_logentry%}
+            <li><a href="/viewStudents">Students</a>
+                <ul>
+                    <li><a href="/StudentManager">Manage Records</a></li>
+                    <li><a href="/importStudentLists/importTemplate">Upload Excel File</a></li>
+                    <li><a href="/StudentManager/viewAddStudent">Add new Student</a></li>
+                </ul>
+            </li>
+            <li><a href="/Manager/ViewSettings">Manager</a>
+                <ul>
+                    <li><a href="/Manager/ViewSettings">View Settings</a></li>
+                    <li><a href="/Manager/">Create CheckIn/Out Season</a></li>
+                    <li><a href="/Manager/setCurrentSeason">Change Season</a></li>
+                </ul>
+            </li>
+            <li><a href="/viewCheckIn_Admin">Check-In(Admin)</a></li>
+            <li><a href="/checkout">Check-Out</a></li>
+            {% else %}
+            <li><a href="/viewCheckIn">Check-In</a></li>
+            <li><a href="/checkout">Check-Out</a></li>
+            {% endif %}
+            {% if perms.dashboard.view_principalinbox %}
+            <li><a href="/principal_inbox/">Inbox</a></li>
+            {% endif %}
+            {% if perms.admin.view_logentry %}
+            <li><a href="/CreateParentForm">Parent Form</a></li>
+            <li><a href="/RegisterStaff">Staff Registration</a></li>
+            <li><a href="/viewCheckIn">Check-In</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="content">
+        {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <p style="background-color: green; color: white; padding: 5px;">{{ message }}</p>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <p style="background-color: red; color: white; padding: 5px;"> {{ message }}</p>
+            {% endif %}
+        {% endfor %}
+            {% block content %}
+            {% endblock %}
+    </div>
+    {% block script %}
+    {% endblock %}
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+.login{
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 30%;
+  transform: translate(-50%, -50%);
+  color: #376b92d6;
+  padding: 10px;
+  text-align: center;
+}
+
+.messages {
+  background-color: #a5caccf2;
+  width: 400px;
+  height: 30px;
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  color: #376b92d6;
+  padding: 10px;
+  text-align: center;
+}
+
+.nav{
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+}
+
+h2{
+  color: white;
+  text-align: center;
+}
+
+.errorlist{
+  background-color: #ff5200;
+  color: #e4bdbd;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #6639ad;
+  padding-left: 10px;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #1381b5;
+}
+
+.active {
+  background-color: #41aadc;
+}
+
+.nav ul h2 span{
+  font-size: small;
+  color: yellow;
+}

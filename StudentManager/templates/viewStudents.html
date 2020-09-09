@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+    {% load static %}
+{% block head %}
+    <title>BrookStone</title>
+{% endblock %}
+{% block style %}
+
+{% endblock %}
+{% block content %}
+    <div class="table">
+            <div class="view-form">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button class="save-button" type="submit" value="save">Search</button>
+                </form>
+            </div>
+            <table class="modelTable">
+                <tr>
+                    <th>SID</th>
+                    <th>LastName</th>
+                    <th>FirstName</th>
+                    <th>MiddleName</th>
+                    <th>Gender</th>
+                    <th>ClassName</th>
+                </tr>
+                {% for Student in students %}
+                <tr>
+                    <td><b><a href="/viewCheckIn/{{ Student.pk }}">{{ forloop.counter }}</a></b></td>
+                    <td>{{ Student.LastName }}</td>
+                    <td>{{ Student.FirstName }}</td>
+                    <td>{{ Student.MiddleName }}</td>
+                    <td>{{ Student.Gender }}</td>
+                    <td>{{ Student.ClassName }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+    </div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

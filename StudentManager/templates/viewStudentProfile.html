@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+    {% load static %}
+{% block head %}
+    <title>BrookStone</title>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4 col-lg-4 col-sm-12 p-2  pl-sm-2">
+        <div class="d-block pb-4 text-center">
+            <img src="{{ student.photo.url }}" class="img-thumbnail" alt="{{ student.LastName }}" style="width:200px; height:200px;" />
+        </div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">First Name: </h5><span style="font-size: 18px;">{{ student.FirstName }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Last Name: </h5><span style="font-size: 18px;">{{ student.LastName }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Middle Name: </h5><span style="font-size: 18px;">{{ student.MiddleName }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Gender: </h5><span style="font-size: 18px;">{{ student.Gender }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Date of Birth: </h5><span style="font-size: 18px;">{{ student.DateOfBirth }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Class: </h5><span style="font-size: 18px;">{{ student.ClassName }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Date of Admission: </h5><span style="font-size: 18px;">{{ student.DateOfAdmission }}</span></div>
+    </div>
+    <div class="col-md-5 col-lg-5 col-sm-12 p-2 pl-sm-2">
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Parent(s): </h5><span style="font-size: 18px;">{{ student.Parent1 }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Parent's Phone: </h5><span style="font-size: 18px;">{{ student.Parent1Phone }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Parent's Phone 2: </h5><span style="font-size: 18px;">{{ student.Parent2Phone }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Parent's Email: </h5><span style="font-size: 18px;">{{ student.ParentEmail }}</span></div>
+        <div  style="border-bottom-style: solid; border-bottom-color: #dd05e0;"><h5 class="border-1 d-inline-block pr-3">Parent's Address: </h5><span style="font-size: 18px;">{{ student.Parent1Address }}</span></div>
+    </div>
+</div>
+{% endblock %}

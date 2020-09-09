@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/login.css' %}" />
+    <title>BrookStone</title>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <h2>BROOKSTONE <span><i>CHECK-IN</i></span></h2>
+        </ul>
+    </div>
+    <div>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="login">
+        <h2>You have being logged out</h2>
+        <a href="{% url 'login' %}">Login again</a>
+    </div>
+</body>
+</html>
