@@ -1,1 +1,1 @@
-web: gunicorn BrookstoneCkInFinal.wsgi
+web: gunicorn brookstoneckinfinal.wsgi
