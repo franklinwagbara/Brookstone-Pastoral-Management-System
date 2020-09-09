@@ -1,1 +1,1 @@
-web: gunicorn brookstoneckinfinal.wsgi
+web: gunicorn brookstoneckinfinal.wsgi --log-file -
