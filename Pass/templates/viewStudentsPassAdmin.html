@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+    {% load static %}
+
+{% load bootstrap4 %}
+
+{% block head %}
+    <title>BrookStone</title>
+{% endblock %}
+
+{% block content %}
+    <div class="p-2">
+            <div class="view-form">
+                <form method="POST" enctype="multipart/form-data" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form layout='inline'%}
+                    {% buttons %}
+                        <button class="btn btn-primary" type="submit" value="save">Search</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+            <table class="table">
+                <tr class="thead-light">
+                    <th class="text-center">S/N</th>
+                    <th class="text-center">Last Name</th>
+                    <th class="text-center">First Name</th>
+                    <th class="text-center">Middle Name</th>
+
+                    <th class="text-center">Gender</th>
+                    <th class="text-center">Class Name</th>
+                </tr>
+                {% for student in students %}
+                <tr>
+                    <td><a href="/Pass/viewCheckInProfileAdmin/{{ student.pk }}"><b>{{ forloop.counter }}</b></a></td>
+                    <td><a class="btn w-100" href="/Pass/viewCheckInProfileAdmin/{{ student.pk }}">{{ student.LastName }}</a></td>
+                    <td><a class="btn w-100" href="/Pass/viewCheckInProfileAdmin/{{ student.pk }}">{{ student.FirstName }}</a></td>
+                    <td><a class="btn w-100" href="/Pass/viewCheckInProfileAdmin/{{ student.pk }}">{{ student.MiddleName }}</a></td>
+
+                    <td><a class="btn w-100" href="/Pass/viewCheckInProfileAdmin/{{ student.pk }}">{{ student.Gender }}</a></td>
+                    <td><a class="btn w-100" href="/Pass/viewCheckInProfileAdmin/{{ student.pk }}">{{ student.ClassName }}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+{% endblock %}
+

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+    {% load static %}
+
+{% load bootstrap4 %}
+
+{% block head %}
+    <title>BrookStone</title>
+{% endblock %}
+
+{% block content %}
+    <div class="pl-4 pt-2">
+        <div class="card" style="width: 22rem;">
+          <img class="card-img-top img-thumbnail" src="{{ student.photo.url }}" alt="{{ student.LastName }}" style="height: 23rem; width: 22rem;">
+          <div class="card-body">
+            <h5 class="card-title">Name: {{ student.LastName }} {{ student.Middle }} {{ student.FirstName }}</h5>
+            <p class="card-text"><span>Gender: {{ student.Gender }}</span><span class="float-right">Class: {{ student.ClassName }}</span></p>
+            <p class="card-text"><span>Date of Birth: {{ student.DateOfBirth }}</span></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><p>Parent(s): {{ student.Parent1 }}</p>
+                                        <p>Parent Phone(s): {{ student.Parent1Phone }} &nbsp
+                                        {% if student.Parent2Phone is not None %}
+                                            {{ student.Parent2Phone }}</p>
+                                        {% endif %}
+            </li>
+            <li class="list-group-item"><p>Other Guardian: {{ student.Parent1 }}</p></li>
+            <li class="list-group-item">Passed? {{ checkin.Passed }}
+                <span class="float-right">
+                    {% if checkin.Passed == "Yes" %}
+                        Time: {{ checkin.DateTimeStamp }}
+                    {% endif %}
+                </span>
+
+            </li>
+          </ul>
+          <div class="card-body">
+                {% if checkin.Passed == "Yes" %}
+                        <button class="btn btn-success" type="submit" value="save" disabled>Passed</button>
+                        <span class="float-right btn btn-secondary">Pass Code: {{ checkin.PassCode }}</span>
+                {% else %}
+                    <form method="POST" action="/Pass/Pass_Admin/{{ student.pk }}" >
+                        {% csrf_token %}
+                        <input class="d-block col-12 mb-3 p-2" type="type" name="reason" placeholder="Reason for pass">
+                        <button class="btn btn-primary" type="submit" value="save" onClick="window.location.reload();">Pass</button>
+                        <span class="float-right btn btn-secondary">Pass Code: {{ checkin.PassCode }}</span>
+                    </form>
+                {% endif %}
+          </div>
+        </div>
+    </div>
+
+{% endblock %}
+
