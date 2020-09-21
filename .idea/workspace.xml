@@ -2,38 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0489bf7d-acc5-4015-8139-4b0730295dab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dashboard/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dashboard/functions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dashboard/templates/FeedBack.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dashboard/templates/dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dashboard/templates/registerStaff.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dashboard/templates/staffEmailForm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParentPortal/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParentPortal/templates/FeedBack.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParentPortal/templates/mail_template.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParentPortal/templates/parentForm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParentPortal/templates/principal_inbox.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParentPortal/templates/sendParentForm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParentPortal/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BrookstoneCkInFinal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BrookstoneCkInFinal/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BrookstoneCkInFinal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BrookstoneCkInFinal/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckIn/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheckIn/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dashboard/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dashboard/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dashboard/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EXPERIMENT.py" beforeDir="false" afterPath="$PROJECT_DIR$/EXPERIMENT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pass/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pass/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StudentManager/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentManager/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StudentManager/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentManager/functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StudentManager/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentManager/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StudentManager/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentManager/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importStudentLists/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/importStudentLists/functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/register.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
