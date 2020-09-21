@@ -145,7 +145,8 @@ class CheckIn(models.Model):
     AccompanyGuardian = models.CharField(verbose_name="Accompanying Guardian", max_length=50, null=True, blank=True)
     AccompanyGuardianPhone = models.CharField(max_length=15, verbose_name="Guardian Phone", null=True, blank=True)
     DateTimeStampPC = models.DateTimeField(verbose_name="Check-In Time", null=True, blank=True)
-    ByStaff = models.CharField(max_length=60, verbose_name="Checked-In By", null=True, blank=True)
+    ByStaffPass = models.CharField(max_length=60, verbose_name="Checked-In By", null=True, blank=True)
+    ByStaffCheckIn = models.CharField(max_length=60, verbose_name="Checked-In By", null=True, blank=True)
     Guardian1 = models.CharField(max_length=100, verbose_name="Guardian 1 Accompanying", null=True, blank=True)
     Guardian2 = models.CharField(max_length=100, verbose_name="Guardian 2 Accompanying", null=True, blank=True)
     Guardian1Phone = models.CharField(max_length=100, verbose_name="Guardian 1 Phone", null=True, blank=True)
@@ -201,3 +202,7 @@ class Allowed(models.Model):
 
     def __str__(self):
         return str(self.Season)
+
+class Pointers(models.Model):
+    PassCodePointer = models.IntegerField(null=False)
+    Season = models.ForeignKey(Seasons, on_delete=models.CASCADE, default=None)

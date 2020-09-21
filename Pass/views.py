@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from StudentManager.functions import viewStudents
-from StudentManager.models import Students, Allowed, CurrentSeason, Seasons, CheckIn
+from StudentManager.models import Students, Allowed, CurrentSeason, Seasons, CheckIn, Pointers
 import concurrent.futures
 import threading
 from django.utils import timezone
@@ -17,7 +17,7 @@ def viewStudentsList(request):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="administrator") in User.objects.get(username=request.user).groups.all()) == False:
-    #    return render(request, 'dashboard/dashboardMain.html',
+    #    return render(request, 'dashboard/dashboard.html',
     #                  {'CheckStat': CheckStat.objects.get(id=1),
     #                   'students': Students.objects.all().filter(CheckedOut="Yes").order_by('LastName') | Students.objects.all().filter(CheckedIn="Yes").order_by('LastName'),
     #                   'mode': 'viewCheckIn'})
@@ -28,7 +28,7 @@ def viewStudentsListAdmin(request):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="administrator") in User.objects.get(username=request.user).groups.all()) == False:
-    #    return render(request, 'dashboard/dashboardMain.html',
+    #    return render(request, 'dashboard/dashboard.html',
     #                  {'CheckStat': CheckStat.objects.get(id=1),
     #                   'students': Students.objects.all().filter(CheckedOut="Yes").order_by('LastName') | Students.objects.all().filter(CheckedIn="Yes").order_by('LastName'),
     #                   'mode': 'viewCheckIn'})
@@ -76,30 +76,43 @@ def viewCheckInProfile(request, pk):
 
 def Pass_helperAdmin(request, id):
     if request.method == "POST":
-        reason = request.POST.getlist("reason")
+        reason = request.POST.getlist("reason")[0]
         current_season = CurrentSeason.objects.get(pk=1)
         season = Seasons.objects.get(SeasonName=current_season)
         student = Students.objects.get(pk=id)
-        pass_code = str(CheckIn.objects.all().count())
-        pass_code = pass_code.zfill(4)
 
-        if Allowed.objects.filter(Student=student, Season=season).extists():
+        if Pointers.objects.filter(id=1).exists():
+            pass_code = Pointers.objects.get(id=1).PassCodePointer + 1
+            Pointers.objects.filter(id=1).update(PassCodePointer=pass_code)
+            Pointers.save
+        else:
+            pass_code = CheckIn.objects.all().count() + 1
+            Pointers.objects.create(id=1, Season=season, PassCodePointer=pass_code)
+            Pointers.save
+
+        pass_code = str(pass_code).zfill(4)
+        print("here")
+        if Allowed.objects.filter(Student=student, Season=season).exists():
             Allowed.objects.create(Student=student, Season=season, Clear="Yes")
+            Allowed.save
         else:
             Allowed.objects.filter(Student=student, Season=season).update(Clear="Yes")
+            Allowed.save
 
         if CheckIn.objects.filter(Student=student, Season=season).exists():
             CheckIn.objects.filter(Student=student,
                                    Season=season).update(Passed="Yes", PassCode=pass_code,
                                                          ReasonPass=reason, DateTimeStamp=timezone.now(),
-                                                         ByStaff=str(request.user))
+                                                         ByStaffPass=(str(request.user.last_name) + ", " + str(request.user.first_name)))
+            CheckIn.save
             incrementTotalCheckIn()
         else:
             CheckIn.objects.create(Student=student,
                                    Season=season, Passed="Yes", PassCode=pass_code,
                                                          ReasonPass=reason,
                                                          DateTimeStamp=timezone.now(),
-                                                         ByStaff=str(request.user))
+                                                         ByStaffPass=(str(request.user.last_name) + ", " + str(request.user.first_name)))
+            CheckIn.save
             incrementTotalCheckIn()
 
     print("checked in----")
@@ -109,20 +122,31 @@ def Pass_helper(request, id):
         current_season = CurrentSeason.objects.get(pk=1)
         season = Seasons.objects.get(SeasonName=current_season)
         student = Students.objects.get(pk=id)
-        pass_code = str(CheckIn.objects.all().count())
-        pass_code = pass_code.zfill(4)
+
+        if Pointers.objects.filter(id=1).exists():
+            pass_code = Pointers.objects.get(id=1).PassCodePointer + 1
+            Pointers.objects.filter(id=1).update(PassCodePointer=pass_code)
+            Pointers.save()
+        else:
+            pass_code = CheckIn.objects.all().count() + 1
+            Pointers.objects.create(id=1, Season=season, PassCodePointer=pass_code)
+            Pointers.save
+
+        pass_code = str(pass_code).zfill(4)
         if CheckIn.objects.filter(Student=student, Season=season).exists():
             CheckIn.objects.filter(Student=student,
                                    Season=season).update(Passed="Yes", PassCode=pass_code,
                                                          ReasonPass="Fulfilled all requirements.", DateTimeStamp=timezone.now(),
-                                                         ByStaff=str(request.user))
+                                                         ByStaffPass=(str(request.user.last_name) + ", " + str(request.user.first_name)))
+            CheckIn.save
             incrementTotalCheckIn()
         else:
             CheckIn.objects.create(Student=student,
                                    Season=season, Passed="Yes", PassCode=pass_code,
                                                          ReasonPass="Fulfilled all requirements.",
                                                          DateTimeStamp=timezone.now(),
-                                                         ByStaff=str(request.user))
+                                                         ByStaffPass=(str(request.user.last_name) + ", " + str(request.user.first_name)))
+            CheckIn.save
             incrementTotalCheckIn()
 
     print("checked in----")
@@ -209,4 +233,4 @@ def PassAdmin(request, pk):
     else:
         messages.error(request, message)
 
-    return redirect("/Pass/viewCheckInProfile/" + str(pk))
+    return redirect("/Pass/viewCheckInProfileAdmin/" + str(pk))

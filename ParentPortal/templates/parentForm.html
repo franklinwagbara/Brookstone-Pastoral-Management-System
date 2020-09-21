@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/dashboard.css' %}"/>
+    <title>BrookStone</title>
+</head>
+<body>
+<div class="nav">
+    <ul><h2>BROOKSTONE <span><i>CHECK-IN</i></span></h2>
+    </ul>
+</div>
+<div class="container">
+    <div class="side-nav">
+        <ul class="side-nav-ul">
+
+        </ul>
+    </div>
+    <div class="content">
+        <div class="table">
+            <div class="view-form">
+                <form method="POST" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="save-button" type="submit" value="save">Submit</button>
+                </form>
+            </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

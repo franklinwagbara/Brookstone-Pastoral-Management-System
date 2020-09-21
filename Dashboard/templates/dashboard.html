@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+    {% load static %}
+{% load bootstrap4 %}
+{% block head %}
+    <link href="{% static 'dashboard/dashboardMain.css' %}" rel="stylesheet" type="text/css"/>
+    <title>BrookStone</title>
+{% endblock %}
+{% block style %}
+    <style>
+        .table-main th {
+        background-color: #00ff1f;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div id="piechart"></div>
+
+    <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                    ['Task', "Today's Check-In"],
+                    ['Checked-In', {{ CheckStat.TotalCkIn }}],
+                    ['Not Checked-In', {{ CheckStat.TotalNotCkIn }}]
+                    ]);
+
+            // Optional; add a title and set the width and height of the chart
+            var options = {'title':"Today's Check-In Summary", 'width':550, 'height':400};
+
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script>
+        /*window.onload = function () {
+            var plot = [{y: 300}, {y: 380}, {y: 200}, {y: 400}, {y: 700},
+             {y: 3000}, {y: 500}, {y: 340}, {y: 560}, {y: 390}, {y: 700}]
+            var chart = new CanvasJS.Chart("chartContainer", { animationEnabled: true, theme: "light2",
+                      title:{ text: "Simple Line Chart" }, axisY:{ includeZero: false },
+                      data: [{ type: "line", dataPoints: plot }]
+                      });
+            chart.render();
+
+        }*/
+    </script>
+    <!--<div id="chartContainer" style="height: 300px; width: 100%;"></div>--!>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+        <div class="table ">
+            <div class="view-form">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% bootstrap_form form layout="inline" %}
+                    {% buttons %}
+                        <button class="btn btn-primary" type="submit" value="save">Search</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+
+            <table class="table" style="position: relative; overflow: auto;">
+                <thead>
+                    <tr class="thead-light">
+                        <th>SID</th>
+                        <th>LastName</th>
+                        <th>FirstName</th>
+                        <th>MiddleName</th>
+                        <th>Gender</th>
+                        <th>ClassName</th>
+                        <th>Gate Pass</th>
+                        <th>Checked In</th>
+                        <th>Checked-In By</th>
+                        <th>Reason for Allowing</th>
+                    </tr>
+                </thead>
+                {% for cin in checkedins %}
+                <tbody >
+                    <tr>
+                        <td><b>{{ forloop.counter }}</b></td>
+                        <td>{{ cin.Student.LastName }}</td>
+                        <td>{{ cin.Student.FirstName }}</td>
+                        <td>{{ cin.Student.MiddleName }}</td>
+                        <td>{{ cin.Student.Gender }}</td>
+                        <td>{{ cin.Student.ClassName }}</td>
+                        {% if cin.Passed == "Yes" %}
+                            <td style="background-color: green; color: white;">Passed</td>
+                        {% else %}
+                            <td style="background-color: red; color: white;">No</td>
+                        {% endif %}
+                        {% if cin.CheckedIn == "Yes" %}
+                            <td style="background-color: green; color: white;">Checked-In</td>
+                        {% else %}
+                            <td style="background-color: red; color: white;">No</td>
+                        {% endif %}
+                        <td>{{ cin.ByStaffCheckIn }}</td>
+                        <td>
+                            {% if cin.CheckedIn == "No" %}
+                                {{ cin.ReasonPass }}
+                            {% else %}
+                                {{ cin.ReasonCheckInPC }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+
+        </div>
+{% endblock %}

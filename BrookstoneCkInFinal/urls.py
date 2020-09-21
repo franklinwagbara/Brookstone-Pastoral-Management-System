@@ -23,6 +23,7 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Dashboard.urls')),
+    path('ParentPortal/', include('ParentPortal.urls')),
     path('CheckIn/', include('CheckIn.urls')),
     path('Pass/', include('Pass.urls')),
     path('importStudentLists/', include('importStudentLists.urls')),

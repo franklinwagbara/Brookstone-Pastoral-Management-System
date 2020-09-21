@@ -10,7 +10,7 @@ def ManageStudents(request):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="administrator") in User.objects.get(username=request.user).groups.all()) == False:
-    #    return render(request, 'dashboard/dashboardMain.html',
+    #    return render(request, 'dashboard/dashboard.html',
     #                  {'CheckStat': CheckStat.objects.get(id=1),
     #                   'students': Students.objects.all().filter(CheckedOut="Yes").order_by('LastName') | Students.objects.all().filter(CheckedIn="Yes").order_by('LastName'),
     #                   'mode': 'viewCheckIn'})
@@ -43,7 +43,7 @@ def allowStudent(request, pk):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="administrator") in User.objects.get(username=request.user).groups.all()) == False:
-    #    return render(request, 'dashboard/dashboardMain.html',
+    #    return render(request, 'dashboard/dashboard.html',
     #                  {'CheckStat': CheckStat.objects.get(id=1),
     #                   'students': Students.objects.all().filter(CheckedIn="Yes").order_by('LastName'),
     #                   'mode': 'viewCheckIn'})

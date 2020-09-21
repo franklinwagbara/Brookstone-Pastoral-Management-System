@@ -4,6 +4,28 @@ from .models import Students
 from Manager.functions import decrementTotalStudentsByOne
 from django.contrib import messages
 
+def FilterStudents(form):
+    last_name = str(form.cleaned_data['LastName'])
+    first_name = str(form.cleaned_data['FirstName'])
+    class_name = str(form.cleaned_data['ClassName'])
+
+    keys = {"FirstName__icontains": first_name,
+            "LastName__icontains": last_name,
+            "ClassName__icontains": class_name}
+
+    expression = "Students.objects.all().filter("
+
+    for key, value in keys.items():
+        if str(value) != 'None':
+            expression += str(key) + "='" + value + "',"
+
+    if ',' in expression:
+        expression = expression[:-1]
+
+    expression += ").order_by('LastName')"
+    students = eval(expression)
+    return students
+
 def viewStudents(request, template):
     if request.method == 'POST':
         form = FilterStudentsForm(request.POST)
@@ -37,7 +59,7 @@ def updateStudentRecord(request, pk, template):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="administrator") in User.objects.get(username=request.user).groups.all()) == False:
-    #    return render(request, 'dashboard/dashboardMain.html',
+    #    return render(request, 'dashboard/dashboard.html',
     #                  {'CheckStat': CheckStat.objects.get(id=1),
     #                   'students': Students.objects.all().filter(CheckedIn="Yes").order_by('LastName'),
     #                   'mode': 'viewCheckIn'})
@@ -63,7 +85,7 @@ def deleteStudentRecord(request, pk, template, form):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="administrator") in User.objects.get(username=request.user).groups.all()) == False:
-    #    return render(request, 'dashboard/dashboardMain.html',
+    #    return render(request, 'dashboard/dashboard.html',
     #                  {'CheckStat': CheckStat.objects.get(id=1),
     #                   'students': Students.objects.all().filter(CheckedIn="Yes").order_by('LastName'),
     #                   'mode': 'viewCheckIn'})

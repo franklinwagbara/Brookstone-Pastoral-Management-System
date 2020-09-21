@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+    {% load static %}
+{% load bootstrap4 %}
+{% block head %}
+
+{% endblock %}
+{% block style %}
+
+{% endblock %}
+{% block content %}
+    <div class="table">
+            <div class="pt-2 w-50">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% bootstrap_form form layout="inline" %}
+                    {% buttons %}
+                        <button class="btn btn-primary" type="submit" name="Query" value="save">Search</button>
+                        <button class="btn btn-success" type="submit" name="send" value="send">Email Forms</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+            <table class="modelTable">
+                <tr>
+                    <th>SID</th>
+                    <th>LastName</th>
+                    <th>FirstName</th>
+                    <th>MiddleName</th>
+                    <th>Gender</th>
+                    <th>ClassName</th>
+                </tr>
+                {% for Student in students %}
+                <tr>
+                    <td><b>{{ forloop.counter }}</b></td>
+                    <td>{{ Student.LastName }}</td>
+                    <td>{{ Student.FirstName }}</td>
+                    <td>{{ Student.MiddleName }}</td>
+                    <td>{{ Student.Gender }}</td>
+                    <td>{{ Student.ClassName }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+    </div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

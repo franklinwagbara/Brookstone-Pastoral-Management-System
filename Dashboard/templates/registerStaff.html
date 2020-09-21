@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+    {% load static %}
+{% load bootstrap4 %}
+{% block head %}
+
+{% endblock %}
+{% block style %}
+
+{% endblock %}
+{% block content %}
+    <div class="view-form">
+        <form method="POST" class="p-4 w-50">
+            {% csrf_token %}
+            {% bootstrap_form form layout='inline'%}
+            {% buttons %}
+            <button class="btn btn-primary" type="submit" value="save">Send</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

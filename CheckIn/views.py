@@ -115,8 +115,6 @@ def CheckIn_helper(request, id):
             _reasonCheckInPC = form.cleaned_data['ReasonCheckInPC']
 
             if _metRequirements == "Yes":
-                print(_metRequirements)
-                print(_metRequirements == "Yes")
                 student = Students.objects.get(pk=id)
                 currentSeason = CurrentSeason.objects.get(pk=1).Season
                 season = Seasons.objects.get(SeasonName=currentSeason)
@@ -130,6 +128,7 @@ def CheckIn_helper(request, id):
                 checkIn.AccompanyGuardian = _accompanyGuardian
                 checkIn.AccompanyGuardianPhone = _accompanyGuardianPhone
                 checkIn.ReasonCheckInPC = _reasonCheckInPC
+                checkIn.ByStaffCheckIn = (str(request.user.last_name) + ", " + str(request.user.first_name))
 
                 checkIn.save()
                 messages.success(request, f'Student has being checked-in successfully!')

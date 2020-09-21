@@ -1,22 +1,43 @@
 {% load static %}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'users/register.css' %}" />
     <title>BrookStone Portal</title>
 </head>
 <body>
-    <div class="nav">
-        <ul>
-            <h2>BROOKSTONE <span><i>CHECK-IN</i></span></h2>
-        </ul>
+    <div class="container-fluid pb-4" style="background-color: #6639ad; border-bottom-style: solid; border-bottom-color: #dd05e0;">
+        <div class="row" style="max-height: 50px;">
+            <div class="col-md-3 col-lg-3">
+
+            </div>
+            <div class="col-8 p-3 mx-auto">
+                <div class="d-none d-md-inline-block d-lg-inline-block mr-5" >
+                    <img class="mb-2" src="/media/logo.jpg" alt="Joh" style="width: 40px; height: 40px;"/>
+                </div>
+                <div class="d-inline-block">
+                  <h2 style="color: white; display: inline-block;">BROOKSTONE</h2><small class="d-none d-md-inline-block d-lg-inline-block alert-primary p-1"><i>CHECK-IN</i></small>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class = "register">
+    <div class="pt-1 col-xl-5 col-lg-5 col-md-5 col-sm-12 text-center mx-auto">
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+    </div>
+    <div class = "pt-5 col-xl-4 col-lg-4 col-md-6 col-sm-12 mx-auto">
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button class="submit-button" type="submit">Sign Up</button>
+            {% bootstrap_form form layout="inline" %}
+            {% buttons %}
+                <button class="btn btn-primary" type="submit" value="save">Sign Up</button>
+            {% endbuttons %}
         </form>
         <div class="register-login">
             <small>
@@ -24,6 +45,7 @@
             </small>
         </div>
     </div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 
 </body>
 </html>
