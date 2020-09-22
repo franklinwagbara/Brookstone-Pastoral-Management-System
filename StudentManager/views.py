@@ -5,7 +5,9 @@ from .functions import viewStudents, updateStudentRecord, deleteStudentRecord
 from django.contrib import messages
 from Manager.functions import incrementTotalStudentsByOne
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
 def ManageStudents(request):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
@@ -17,12 +19,15 @@ def ManageStudents(request):
 
     return viewStudents(request, "ManageStudents.html")
 
+@login_required(login_url='login')
 def viewUpdateStudentRecord(request, pk):
     return updateStudentRecord(request, pk, 'updateStudentRecord.html')
 
+@login_required(login_url='login')
 def viewDeleteStudentRecord(request, pk):
     return deleteStudentRecord(request, pk, "ManageStudents.html", FilterStudentsForm)
 
+@login_required(login_url='login')
 def viewAddStudent(request):
     if request.method == 'POST':
         form = StudentsForm(request.POST or None, request.FILES or None)
@@ -35,10 +40,12 @@ def viewAddStudent(request):
         form = StudentsForm()
     return render(request, 'viewAddStudent.html', {'form': form})
 
+@login_required(login_url='login')
 def viewStudentProfile(request, pk):
     student = Students.objects.get(id=pk)
     return render(request, 'viewStudentProfile.html', {'student': student})
 
+@login_required(login_url='login')
 def allowStudent(request, pk):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or

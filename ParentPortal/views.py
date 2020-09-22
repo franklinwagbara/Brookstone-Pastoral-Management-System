@@ -12,7 +12,9 @@ from StudentManager.forms import FilterStudentsForm
 from .forms import ParentForm
 import concurrent.futures
 import threading
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
 def parentForm(request, pk):
     print("In ParentForm")
     #html_message = render_to_string('dashboard/mail_template.html', {'context': request.build_absolute_uri(reverse('dashboard-parentForm', args=(pk, )))})
@@ -68,6 +70,7 @@ def sendMail(request, student):
         messages.error(request, msg)
     return msg
 
+@login_required(login_url='login')
 def EmailParentForms(request, student):
     # message="Email failed!"
     # with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -90,6 +93,8 @@ def EmailParentForms(request, student):
         print(message)
 
     return message
+
+@login_required(login_url='login')
 def homepage(request):
     if request.method == 'POST':
         form = FilterStudentsForm(request.POST)

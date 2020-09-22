@@ -2,7 +2,6 @@
     {% load static %}
 {% load bootstrap4 %}
 {% block head %}
-    <link href="{% static 'dashboard/dashboardMain.css' %}" rel="stylesheet" type="text/css"/>
     <title>BrookStone</title>
 {% endblock %}
 {% block style %}
@@ -26,8 +25,8 @@
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                     ['Task', "Today's Check-In"],
-                    ['Checked-In', {{ CheckStat.TotalCkIn }}],
-                    ['Not Checked-In', {{ CheckStat.TotalNotCkIn }}]
+                    ['Checked-In', {{ Season.TotalCheckIn }}],
+                    ['Not Checked-In', {{ Season.TotalNotCheckIn }}]
                     ]);
 
             // Optional; add a title and set the width and height of the chart

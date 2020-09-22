@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .functions import importXl
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import Group, User
 
@@ -11,13 +11,7 @@ import openpyxl
 from StudentManager.models import Students
 from StudentManager.classes import CheckStat_class, Students_class
 
-#####################
-
-def test(request):
-    Students.objects.all().delete()
-    return HttpResponse(message)
-
-######################
+@login_required(login_url='login')
 def importStudentLists(request):
     message = "None"
     excel_data = "None"

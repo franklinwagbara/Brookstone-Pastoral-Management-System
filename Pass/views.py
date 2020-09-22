@@ -12,7 +12,9 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.contrib import messages
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
 def viewStudentsList(request):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
@@ -24,6 +26,7 @@ def viewStudentsList(request):
 
     return viewStudents(request, "viewStudentsPass.html")
 
+@login_required(login_url='login')
 def viewStudentsListAdmin(request):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
@@ -34,6 +37,7 @@ def viewStudentsListAdmin(request):
     #                   'mode': 'viewCheckIn'})
     return viewStudents(request, "viewStudentsPassAdmin.html")
 
+@login_required(login_url='login')
 def viewCheckInProfileAdmin(request, pk):
     student = Students.objects.get(pk=pk)
     season = CurrentSeason.objects.get(pk=1).Season
@@ -54,6 +58,7 @@ def viewCheckInProfileAdmin(request, pk):
     return render(request, "checkInProfilePassAdmin.html", {'student': student, 'checkedIn': checkedIn, 'checkin': checkin,
                                                    'allowed': allowed})
 
+@login_required(login_url='login')
 def viewCheckInProfile(request, pk):
     student = Students.objects.get(pk=pk)
     season = CurrentSeason.objects.get(pk=1).Season
@@ -105,7 +110,7 @@ def Pass_helperAdmin(request, id):
                                                          ReasonPass=reason, DateTimeStamp=timezone.now(),
                                                          ByStaffPass=(str(request.user.last_name) + ", " + str(request.user.first_name)))
             CheckIn.save
-            incrementTotalCheckIn()
+            #incrementTotalCheckIn()
         else:
             CheckIn.objects.create(Student=student,
                                    Season=season, Passed="Yes", PassCode=pass_code,
@@ -113,7 +118,7 @@ def Pass_helperAdmin(request, id):
                                                          DateTimeStamp=timezone.now(),
                                                          ByStaffPass=(str(request.user.last_name) + ", " + str(request.user.first_name)))
             CheckIn.save
-            incrementTotalCheckIn()
+            #incrementTotalCheckIn()
 
     print("checked in----")
 
@@ -139,7 +144,7 @@ def Pass_helper(request, id):
                                                          ReasonPass="Fulfilled all requirements.", DateTimeStamp=timezone.now(),
                                                          ByStaffPass=(str(request.user.last_name) + ", " + str(request.user.first_name)))
             CheckIn.save
-            incrementTotalCheckIn()
+            #incrementTotalCheckIn()
         else:
             CheckIn.objects.create(Student=student,
                                    Season=season, Passed="Yes", PassCode=pass_code,
@@ -147,7 +152,7 @@ def Pass_helper(request, id):
                                                          DateTimeStamp=timezone.now(),
                                                          ByStaffPass=(str(request.user.last_name) + ", " + str(request.user.first_name)))
             CheckIn.save
-            incrementTotalCheckIn()
+            #incrementTotalCheckIn()
 
     print("checked in----")
 
@@ -185,6 +190,8 @@ def wardCheckedInEmail(request, pk):
     message = sendEMail(request, mailHead, recipient, template, context)
 
     return message
+
+@login_required(login_url='login')
 def Pass(request, pk):
     #with concurrent.futures.ThreadPoolExecutor() as executor:
     #    results = [executor.submit(checkin_helper, request, id), executor.submit(wardCheckedInEmail, request, id)]
@@ -212,6 +219,7 @@ def Pass(request, pk):
     #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     #return redirect("/Pass/viewCheckInProfile/" + str(pk))
 
+@login_required(login_url='login')
 def PassAdmin(request, pk):
     # with concurrent.futures.ThreadPoolExecutor() as executor:
     #    results = [executor.submit(checkin_helper, request, id), executor.submit(wardCheckedInEmail, request, id)]

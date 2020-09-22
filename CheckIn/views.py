@@ -13,7 +13,10 @@ from django.utils.html import strip_tags
 from django.contrib import messages
 from django.urls import reverse
 from .forms import PassCodeForm, DenyEntryForm, admitForm
+from django.contrib.auth.decorators import login_required
+from Manager.functions import incrementTotalCheckIn
 
+@login_required(login_url='login')
 def denyEntry(request, pk):
     if request.method == 'POST':
         form = DenyEntryForm(request.POST or None)
@@ -47,6 +50,7 @@ def denyEntry(request, pk):
         form = DenyEntryForm()
     return redirect("/CheckIn/viewCheckInProfile/" + str(pk))
 
+@login_required(login_url='login')
 def verifyPass(request):
     if request.method == 'POST':
         form = PassCodeForm(request.POST or None, request.FILES or None)
@@ -72,6 +76,7 @@ def verifyPass(request):
         form = PassCodeForm()
     return render(request, 'verifyPass.html', {'form': form})
 
+@login_required(login_url='login')
 def viewCheckInProfile(request, pk):
     student = Students.objects.get(pk=pk)
     season = CurrentSeason.objects.get(pk=1).Season
@@ -131,6 +136,7 @@ def CheckIn_helper(request, id):
                 checkIn.ByStaffCheckIn = (str(request.user.last_name) + ", " + str(request.user.first_name))
 
                 checkIn.save()
+                incrementTotalCheckIn()
                 messages.success(request, f'Student has being checked-in successfully!')
             else:
                 messages.error(request, f'Check-In Failed!: Student failed to meet the requirements.')
@@ -170,6 +176,8 @@ def wardCheckedInEmail(request, pk):
     message = sendEMail(request, mailHead, recipient, template, context)
 
     return message
+
+@login_required(login_url='login')
 def Check_In(request, pk):
     #with concurrent.futures.ThreadPoolExecutor() as executor:
     #    results = [executor.submit(checkin_helper, request, id), executor.submit(wardCheckedInEmail, request, id)]

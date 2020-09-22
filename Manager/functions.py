@@ -30,7 +30,9 @@ def InitializeOtherSeasonValues(Season):
 
 def incrementTotalStudentsByOne():
     try:
-        season = Seasons.objects.get(pk=1)
+        cs = CurrentSeason.objects.get(pk=1).Season
+        season = Seasons.objects.get(SeasonName=cs)
+
         season.TotalStudents = season.TotalStudents + 1
         season.save()
         return "Operation Successfull!"
@@ -39,7 +41,9 @@ def incrementTotalStudentsByOne():
 
 def decrementTotalStudentsByOne():
     try:
-        season = Seasons.objects.get(pk=1)
+        cs = CurrentSeason.objects.get(pk=1).Season
+        season = Seasons.objects.get(SeasonName=cs)
+
         if season.TotalStudents > 0:
             season.TotalStudents = season.TotalStudents - 1
             season.save()
@@ -49,7 +53,8 @@ def decrementTotalStudentsByOne():
 
 def setTotalStudents():
     try:
-        season = Seasons.objects.get(pk=1)
+        cs = CurrentSeason.objects.get(pk=1).Season
+        season = Seasons.objects.get(SeasonName=cs)
         season.TotalStudents = Students.objects.all().count()
         season.save()
         return "Operatioin was Successfull!"
@@ -58,12 +63,20 @@ def setTotalStudents():
 
 def incrementTotalCheckIn():
     try:
-        season = Seasons.objects.get(pk=1)
+        print("here 00000")
+        print("test : " + str(CurrentSeason.objects.get(pk=1).Season))
+        cs = CurrentSeason.objects.get(pk=1).Season
+        print(cs)
+        print("season : " + str(Seasons.objects.get(SeasonName=cs)))
+        season = Seasons.objects.get(SeasonName=cs)
+        print('beforemiddle')
         season.TotalCheckIn = season.TotalCheckIn + 1
-
+        print("middel")
         if season.TotalNotCheckIn > 1:
             season.TotalNotCheckIn = season.TotalNotCheckIn - 1
 
+        print("afternoon")
+        print('total : ' + str(season.TotalCheckIn))
         season.save()
         return "Operation Successfull!"
     except Exception as ex:
@@ -71,7 +84,8 @@ def incrementTotalCheckIn():
 
 def decrementTotalCheckIn():
     try:
-        season = Seasons.objects.get(pk=1)
+        cs = CurrentSeason.objects.get(pk=1).Season
+        season = Seasons.objects.get(SeasonName=cs)
 
         season.TotalNotCheckIn = season.TotalNotCheckIn + 1
 

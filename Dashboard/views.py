@@ -14,12 +14,16 @@ from StudentManager.forms import FilterStudentsForm
 import concurrent.futures
 import threading
 from .functions import viewCheckInList
+from django.contrib.auth.decorators import login_required
+from StudentManager.models import Seasons, CurrentSeason
 
 # Create your views here.
+@login_required(login_url='login')
 def homepage(request):
-    return viewCheckInList(request, 'dashboard.html')
+    return viewCheckInList(request, 'dashboard.html', Seasons.objects.get(SeasonName=CurrentSeason.objects.get(id=1).Season))
 
 #@user_passes_test(lambda u: Group.objects.get(name='administrator') in u.groups.all())
+@login_required(login_url='login')
 def sendStaffMail(request):
     if request.method == 'POST':
         #print("sendstaffmail" + str(Group.objects.get(id=1)))
