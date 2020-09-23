@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Students, CheckIn, CheckOut, Seasons, CurrentSeason, Pointers
+from .models import Students, CheckIn, CheckOut, Seasons, CurrentSeason, Pointers, Gate, Account, SchoolAdmin, Admin
 
 class StudentsAdmin(admin.ModelAdmin):
     list_display = ('LastName', 'FirstName', 'MiddleName',
@@ -20,3 +20,7 @@ admin.site.register(CheckOut)
 admin.site.register(Seasons, SeasonsAdmin)
 admin.site.register(CurrentSeason)
 admin.site.register(Pointers, PointersAdmin)
+admin.site.register(Gate)
+admin.site.register(Account)
+admin.site.register(SchoolAdmin)
+admin.site.register(Admin)

@@ -28,7 +28,6 @@ def importXl(request):
 
             # getting a particular sheet by name out of many sheets
             worksheet = wb["Sheet1"]
-            print(worksheet)
 
             excel_data = list()
             # iterating over the rows and
@@ -59,7 +58,6 @@ def importXl(request):
                         student = Students.objects.create(ClassName=form_class, LastName=LastName, FirstName=FirstName,
                                                       MiddleName=MiddleName, Gender=Gender, ParentEmail=parentsEmail)
                         student.save()
-                        print(str(row[0].value) + str(row[1].value) + str(row[2].value))
                         for cell in row:
                             if i > 0:
                                 row_data.append(str(cell.value))

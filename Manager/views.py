@@ -4,8 +4,10 @@ from django.contrib import messages
 from .functions import InitializeOtherSeasonValues
 from StudentManager.models import Seasons, Students, CurrentSeason
 from django.contrib.auth.decorators import login_required
+from Dashboard.decorators import admin
 
 @login_required(login_url='login')
+@admin
 def createSeason(request):
     if request.method == 'POST':
         form = SeasonForm(request.POST or None, request.FILES or None)
@@ -25,10 +27,10 @@ def createSeason(request):
             return render(request, 'createSeason.html', {'form': form})
     else:
         form = SeasonForm()
-        print(form)
     return render(request, 'createSeason.html', {'form': form})
 
 @login_required(login_url='login')
+@admin
 def changeCurrentSeason(request):
     message=""
     currentseason = CurrentSeason.objects.get(pk=1)
@@ -48,6 +50,8 @@ def changeCurrentSeason(request):
         form = CurrentSeasonForm(instance=currentseason)
     return render(request, 'changeCurrentSeason.html', {'form': form})
 
+@login_required(login_url='login')
+@admin
 def viewSettings(request):
     currentSeason = CurrentSeason.objects.get(pk=1)
     season = currentSeason.Season

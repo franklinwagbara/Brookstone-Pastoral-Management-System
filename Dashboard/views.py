@@ -15,15 +15,22 @@ import concurrent.futures
 import threading
 from .functions import viewCheckInList
 from django.contrib.auth.decorators import login_required
-from StudentManager.models import Seasons, CurrentSeason
+from StudentManager.models import Seasons, CurrentSeason, CheckIn
+from Dashboard import decorators
+from django.contrib.auth.models import Permission
+from .decorators import admin
 
 # Create your views here.
 @login_required(login_url='login')
 def homepage(request):
-    return viewCheckInList(request, 'dashboard.html', Seasons.objects.get(SeasonName=CurrentSeason.objects.get(id=1).Season))
+    season = Seasons.objects.get(SeasonName=CurrentSeason.objects.get(id=1).Season)
+    return render(request, 'dashboard.html',
+                  {'checkedins': CheckIn.objects.all().filter(Season=season).order_by('Student__LastName'),
+                   'Season': Seasons.objects.get(SeasonName=CurrentSeason.objects.get(id=1).Season)})
 
 #@user_passes_test(lambda u: Group.objects.get(name='administrator') in u.groups.all())
 @login_required(login_url='login')
+@admin
 def sendStaffMail(request):
     if request.method == 'POST':
         #print("sendstaffmail" + str(Group.objects.get(id=1)))
@@ -32,7 +39,6 @@ def sendStaffMail(request):
             first_name = str(form.cleaned_data['FirstName'])
             last_name = str(form.cleaned_data['LastName'])
             email = str(form.cleaned_data['Email'])
-            print(email)
             html_message = render_to_string('staffEmailForm.html', {
                 'link': request.build_absolute_uri(reverse('users-register')), 'FirstName': first_name,
                 'LastName': last_name, 'Email': email})
@@ -47,10 +53,12 @@ def sendStaffMail(request):
                 messages.success(request, "Email sent Successfully!")
             except SMTPException:
                 messages.error(request, SMTPException)
-                print(SMTPException)
             return render(request, 'FeedBack.html')
     else:
         form = staffForm()
     return render(request, 'registerStaff.html',
                   {'form': form})
+
+def test(request):
+    return render(request, "test.html")
 

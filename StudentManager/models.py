@@ -206,3 +206,25 @@ class Allowed(models.Model):
 class Pointers(models.Model):
     PassCodePointer = models.IntegerField(null=False)
     Season = models.ForeignKey(Seasons, on_delete=models.CASCADE, default=None)
+
+
+class Gate(models.Model):
+    user = models.CharField(max_length=50, null=True, blank=True)
+
+
+class Account(models.Model):
+    user = models.CharField(max_length=50, null=True, blank=True)
+
+
+class SchoolAdmin(models.Model):
+    user = models.CharField(max_length=50, null=True, blank=True)
+
+
+class Admin(models.Model):
+    user = models.CharField(max_length=50, null=True, blank=True)
+
+
+class Pastoral(models.Model):
+    user = models.CharField(max_length=50, null=True, blank=True)
+
+

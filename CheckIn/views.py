@@ -15,8 +15,10 @@ from django.urls import reverse
 from .forms import PassCodeForm, DenyEntryForm, admitForm
 from django.contrib.auth.decorators import login_required
 from Manager.functions import incrementTotalCheckIn
+from Dashboard.decorators import admin, pastoral
 
 @login_required(login_url='login')
+@pastoral
 def denyEntry(request, pk):
     if request.method == 'POST':
         form = DenyEntryForm(request.POST or None)
@@ -51,6 +53,7 @@ def denyEntry(request, pk):
     return redirect("/CheckIn/viewCheckInProfile/" + str(pk))
 
 @login_required(login_url='login')
+@pastoral
 def verifyPass(request):
     if request.method == 'POST':
         form = PassCodeForm(request.POST or None, request.FILES or None)
@@ -77,6 +80,7 @@ def verifyPass(request):
     return render(request, 'verifyPass.html', {'form': form})
 
 @login_required(login_url='login')
+@pastoral
 def viewCheckInProfile(request, pk):
     student = Students.objects.get(pk=pk)
     season = CurrentSeason.objects.get(pk=1).Season
@@ -178,6 +182,7 @@ def wardCheckedInEmail(request, pk):
     return message
 
 @login_required(login_url='login')
+@pastoral
 def Check_In(request, pk):
     #with concurrent.futures.ThreadPoolExecutor() as executor:
     #    results = [executor.submit(checkin_helper, request, id), executor.submit(wardCheckedInEmail, request, id)]

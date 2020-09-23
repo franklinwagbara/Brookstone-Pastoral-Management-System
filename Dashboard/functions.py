@@ -9,16 +9,10 @@ def viewCheckInList(request, template):
             last_name = str(form.cleaned_data['LastName'])
             first_name = str(form.cleaned_data['FirstName'])
             class_name = str(form.cleaned_data['ClassName'])
-            print(first_name + " + " + last_name + " + " + class_name)
             cs = CurrentSeason.objects.get(id=1)
             checkin = CheckIn.objects.all().filter(Student__FirstName__contains=first_name,
                                                                                   Student__LastName__contains=last_name,
                                                                                 Student__ClassName__contains=class_name)
-            print(checkin)
-            for c in checkin:
-                print(
-                    str(c.Student.ClassName) + " + " + str(c.Season) + " + " + str(c.Passed) + " + " + str(c.CheckedIn))
-
             keys = {"Student__FirstName__icontains": first_name,
                     "Student__LastName__icontains": last_name,
                     "Student__ClassName__icontains": class_name}
@@ -32,9 +26,7 @@ def viewCheckInList(request, template):
             expression += "Season=cs.Season"
 
             expression += ").order_by('Student__LastName')"
-            print(expression)
             checkedins = eval(expression)
-            print(checkedins)
             return render(request, template, {'form': form, 'checkedins': checkedins})
     else:
         form = FilterStudentsForm()
@@ -48,16 +40,10 @@ def viewCheckInList(request, template, Season):
             last_name = str(form.cleaned_data['LastName'])
             first_name = str(form.cleaned_data['FirstName'])
             class_name = str(form.cleaned_data['ClassName'])
-            print(first_name + " + " + last_name + " + " + class_name)
             cs = CurrentSeason.objects.get(id=1)
             checkin = CheckIn.objects.all().filter(Student__FirstName__contains=first_name,
                                                                                   Student__LastName__contains=last_name,
                                                                                 Student__ClassName__contains=class_name)
-            print(checkin)
-            for c in checkin:
-                print(
-                    str(c.Student.ClassName) + " + " + str(c.Season) + " + " + str(c.Passed) + " + " + str(c.CheckedIn))
-
             keys = {"Student__FirstName__icontains": first_name,
                     "Student__LastName__icontains": last_name,
                     "Student__ClassName__icontains": class_name}
@@ -71,9 +57,7 @@ def viewCheckInList(request, template, Season):
             expression += "Season=cs.Season"
 
             expression += ").order_by('Student__LastName')"
-            print(expression)
             checkedins = eval(expression)
-            print(checkedins)
             return render(request, template, {'form': form, 'checkedins': checkedins, 'Season': Season})
     else:
         form = FilterStudentsForm()

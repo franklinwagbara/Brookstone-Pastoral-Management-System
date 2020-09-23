@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="p-2">
+    <div class="container mb-3 mt-3">
             <div class="view-form">
                 <form method="POST" enctype="multipart/form-data" class="form">
                     {% csrf_token %}
@@ -18,27 +18,33 @@
                     {% endbuttons %}
                 </form>
             </div>
-            <table class="table">
-                <tr class="thead-light">
-                    <th class="text-center">S/N</th>
-                    <th class="text-center">Last Name</th>
-                    <th class="text-center">First Name</th>
-                    <th class="text-center">Middle Name</th>
+            <table id="example" class="table table-striped table-bordered table-sm " cellspacing="0"
+  width="100%" style="min-width: 500px;">
+                <thead>
+                    <tr class="thead-light">
+                        <th class="text-center">S/N</th>
+                        <th class="text-center">Last Name</th>
+                        <th class="text-center">First Name</th>
+                        <th class="text-center">Middle Name</th>
 
-                    <th class="text-center">Gender</th>
-                    <th class="text-center">Class Name</th>
-                </tr>
-                {% for student in students %}
-                <tr>
-                    <td><a href="/Pass/viewCheckInProfile/{{ student.pk }}"><b>{{ forloop.counter }}</b></a></td>
-                    <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.LastName }}</a></td>
-                    <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.FirstName }}</a></td>
-                    <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.MiddleName }}</a></td>
+                        <th class="text-center">Gender</th>
+                        <th class="text-center">Class Name</th>
+                    </tr>
+                </thead>
 
-                    <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.Gender }}</a></td>
-                    <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.ClassName }}</a></td>
-                </tr>
-                {% endfor %}
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td><a href="/Pass/viewCheckInProfile/{{ student.pk }}"><b>{{ forloop.counter }}</b></a></td>
+                        <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.LastName }}</a></td>
+                        <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.FirstName }}</a></td>
+                        <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.MiddleName }}</a></td>
+
+                        <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.Gender }}</a></td>
+                        <td><a class="btn w-100" href="/Pass/viewCheckInProfile/{{ student.pk }}">{{ student.ClassName }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
 {% endblock %}

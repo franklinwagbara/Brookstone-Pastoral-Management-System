@@ -2,7 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0489bf7d-acc5-4015-8139-4b0730295dab" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Dashboard/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BrookstoneCkInFinal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BrookstoneCkInFinal/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CheckIn/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheckIn/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dashboard/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dashboard/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dashboard/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ParentPortal/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ParentPortal/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pass/templates/viewStudentsPass.html" beforeDir="false" afterPath="$PROJECT_DIR$/Pass/templates/viewStudentsPass.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pass/templates/viewStudentsPassAdmin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Pass/templates/viewStudentsPassAdmin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pass/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pass/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentManager/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentManager/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentManager/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentManager/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentManager/templates/ManageStudents.html" beforeDir="false" afterPath="$PROJECT_DIR$/StudentManager/templates/ManageStudents.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentManager/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentManager/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importStudentLists/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/importStudentLists/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importStudentLists/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/importStudentLists/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,8 +33,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>

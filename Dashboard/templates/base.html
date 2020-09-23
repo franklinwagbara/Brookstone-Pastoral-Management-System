@@ -14,6 +14,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
       <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
 
     {% block head %}
     {% endblock %}
@@ -53,58 +56,100 @@
                     </div>
                 </nav>
             <div class="btn-group-vertical btn-block navbar-collapse" id="main">
-              <button type="button" class="btn btn-primary  active dropdown-toggle m-1 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;" data-toggle="collapse" data-target="#mainNav">
-                  Students
-              </button>
-                <div class="collapse navbar-collapse text-truncate" id="mainNav">
-                    <div class="navbar-nav text-center">
-                        <a class="nav-item nav-link active" href="/StudentManager"><span class="text-wrap">Manage Records</span></a>
-                        <a class="nav-item nav-link" href="/importStudentLists/importTemplate"><span class="text-wrap">Upload Excel File</span></a>
-                        <a class="nav-item nav-link" href="/StudentManager/viewAddStudent"><span class="text-wrap">Add new Student</span></a>
-                    </div>
-                </div>
+                {% if perms.StudentManager.view_admin or perms.StudentManager.view_account %}
+                    <button type="button" class="btn btn-primary  active dropdown-toggle m-1 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;" data-toggle="collapse" data-target="#mainNav">
+                        Students
+                    </button>
+                    <div class="collapse navbar-collapse text-truncate" id="mainNav">
+                        <div class="navbar-nav text-center">
+                            <a class="nav-item nav-link active" href="/StudentManager"><span class="text-wrap">Manage Records</span></a>
 
-                <button type="button" class="btn btn-primary dropdown-toggle m-1 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;" data-toggle="collapse" data-target="#mainNav2">
-                   Manager
-                </button>
-                <div class="collapse navbar-collapse" id="mainNav2">
-                    <div class="navbar-nav text-center">
-                        <a class="nav-item nav-link active" href="/Manager/viewSettings"><span class="text-wrap">View Settings</span></a>
-                        <a class="nav-item nav-link" href="/Manager/"><span class="text-wrap">Create CheckIn/Out Season</span></a>
-                        <a class="nav-item nav-link" href="/Manager/changeCurrentSeason"><span class="text-wrap">Change Season</span></a>
+                            {% if perms.StudentManager.view_admin or perms.StudentManager.view_schooladmin %}
+                                <a class="nav-item nav-link" href="/importStudentLists/importTemplate"><span class="text-wrap">Upload Excel File</span></a>
+                                <a class="nav-item nav-link" href="/StudentManager/viewAddStudent"><span class="text-wrap">Add new Student</span></a>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-                <a type="button" href="/Pass/Pass_Admin" class="btn btn-primary  m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
-                    Gate Pass(Admin)
-                </a>
-                <a type="button" href="/Pass" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
-                    Gate Pass
-                </a>
-                <a type="button" href="/CheckIn" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
-                    Check-In(PC)
-                </a>
-                <a type="button" href="/principal_inbox/" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
-                    Inbox
-                </a>
-                <a type="button" href="/ParentPortal" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
-                    Parent Form
-                </a>
-                <a type="button" href="/RegisterStaff" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
-                    Staff Registration
-                </a>
-                <a type="button" href="/checkout" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
-                    Check-Out
-                </a>
+                {% endif %}
+
+                {% if perms.StudentManager.view_admin %}
+                    <button type="button" class="btn btn-primary dropdown-toggle m-1 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;" data-toggle="collapse" data-target="#mainNav2">
+                       Manager
+                    </button>
+                    <div class="collapse navbar-collapse" id="mainNav2">
+                        <div class="navbar-nav text-center">
+                            <a class="nav-item nav-link active" href="/Manager/viewSettings"><span class="text-wrap">View Settings</span></a>
+                            <a class="nav-item nav-link" href="/Manager/"><span class="text-wrap">Create CheckIn/Out Season</span></a>
+                            <a class="nav-item nav-link" href="/Manager/changeCurrentSeason"><span class="text-wrap">Change Season</span></a>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if perms.StudentManager.view_account %}
+                    <a type="button" href="/Pass/Pass_Admin" class="btn btn-primary  m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                        Gate Pass(Admin)
+                    </a>
+                {% endif %}
+
+                {% if perms.StudentManager.view_gate %}
+                    <a type="button" href="/Pass" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                        Gate Pass
+                    </a>
+                {% endif %}
+
+                {% if perms.StudentManager.view_pastoral %}
+                    <a type="button" href="/CheckIn" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                        Check-In(PC)
+                    </a>
+                {% endif %}
+
+                {% if perms.StudentManager.view_admin %}
+                    <a type="button" href="/principal_inbox/" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                        Inbox
+                    </a>
+                {% endif %}
+
+                {% if perms.StudentManager.view_admin %}
+                    <a type="button" href="/ParentPortal" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                        Parent Form
+                    </a>
+                {% endif %}
+
+                {% if perms.StudentManager.view_admin %}
+                    <a type="button" href="/RegisterStaff" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                        Staff Registration
+                    </a>
+                {% endif %}
+
+                {% if perms.StudentManager.view_admin %}
+                    <a type="button" href="/checkout" class="btn btn-primary m-1 p-2 border-0" style="background-color:#03a9f4; height: 40px; border-radius: 0px;">
+                        Check-Out
+                    </a>
+                {% endif %}
             </div>
         </div>
       <div class="col-10" style="border-left-style: solid; border-top-style: solid; border-width: 10px;border-color: #03a9f4;">
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
         {% block content %}
+
         {% endblock %}
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+<script>
+$(document).ready(function () {
+$('#example').DataTable({
+"scrollX": true,
+"scrollY": 500,
+});
+$('.dataTables_length').addClass('bs-select');
+});
+</script>
 </body>
 </html>

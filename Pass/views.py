@@ -13,6 +13,7 @@ from django.utils.html import strip_tags
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from Dashboard.decorators import management
 
 @login_required(login_url='login')
 def viewStudentsList(request):
@@ -27,6 +28,7 @@ def viewStudentsList(request):
     return viewStudents(request, "viewStudentsPass.html")
 
 @login_required(login_url='login')
+@management
 def viewStudentsListAdmin(request):
     #if bool(Group.objects.get(name="accounts") in User.objects.get(username=request.user).groups.all() or
     #           Group.objects.get(name="principal") in User.objects.get(username=request.user).groups.all() or
@@ -38,6 +40,7 @@ def viewStudentsListAdmin(request):
     return viewStudents(request, "viewStudentsPassAdmin.html")
 
 @login_required(login_url='login')
+@management
 def viewCheckInProfileAdmin(request, pk):
     student = Students.objects.get(pk=pk)
     season = CurrentSeason.objects.get(pk=1).Season
@@ -209,7 +212,6 @@ def Pass(request, pk):
 
     message = "Verification Successfull! Student is cleared to pass."
     if "Successfull" in message:
-        print("here " + message)
         messages.success(request, message)
     else:
         messages.error(request, message)
@@ -220,6 +222,7 @@ def Pass(request, pk):
     #return redirect("/Pass/viewCheckInProfile/" + str(pk))
 
 @login_required(login_url='login')
+@management
 def PassAdmin(request, pk):
     # with concurrent.futures.ThreadPoolExecutor() as executor:
     #    results = [executor.submit(checkin_helper, request, id), executor.submit(wardCheckedInEmail, request, id)]
